@@ -1,12 +1,12 @@
 function ListingCard() {
   return (
-    <div className="bg-white rounded-xl2 shadow-card overflow-hidden hover:scale-[1.02] transition">
+    <div className="bg-white rounded-[var(--radius-xl2)] shadow-[var(--shadow-card)] overflow-hidden hover:scale-[1.02] transition">
       
       <img
-        src="https://via.placeholder.com/300"
-        alt="listing"
-        className="w-full h-48 object-cover"
-      />
+  src="https://images.unsplash.com/photo-1505691938895-1758d7feb511"
+  alt="listing"
+  className="w-full h-48 object-cover"
+   />
 
       <div className="p-4">
         <h2 className="font-semibold text-lg">Beautiful Apartment</h2>
