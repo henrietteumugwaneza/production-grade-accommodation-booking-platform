@@ -1,3 +1,4 @@
+import ListingCard from "../components/ListingCard";
 import MainLayout from "../layouts/MainLayout";
 
 function Home() {
@@ -8,7 +9,10 @@ function Home() {
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* Cards will go here */}
+        <ListingCard />
+        <ListingCard />
+        <ListingCard />
+        <ListingCard />
       </div>
     </MainLayout>
   );
