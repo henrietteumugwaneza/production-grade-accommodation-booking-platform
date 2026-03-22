@@ -1,12 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_KEY = import.meta.env.VITE_RAPID_API_KEY;
+const getListings = async (placeId) => {
+  const options = {
+    method: 'GET',
+    url: 'https://airbnb19.p.rapidapi.com/api/v2/searchPropertyByPlaceId',
+    params: { placeId: placeId },
+    headers: {
+      'X-RapidAPI-Key': 'YOUR_ACTUAL_API_KEY_HERE', // Check this!
+      'X-RapidAPI-Host': 'airbnb19.p.rapidapi.com'
+    }
+  };
 
-export const api = axios.create({
-  baseURL: "https://airbnb19.p.rapidapi.com/api/v2",
-  headers: {
-    "x-rapidapi-key": API_KEY,
-    "x-rapidapi-host": "airbnb19.p.rapidapi.com",
-    "Content-Type": "application/json",
-  },
-});
+  try {
+    const response = await axios.request(options);
+    return response.data;
+  } catch (error) {
+    console.error("API ERROR:", error);
+  }
+};

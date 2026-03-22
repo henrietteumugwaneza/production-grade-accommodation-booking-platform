@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
-/* 🎨 Your custom design system */
 @theme {
+
   --color-primary: #FF385C;
   --color-dark: #222222;
   --color-light: #F7F7F7;
 
   --radius-xl2: 1.5rem;
-
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
