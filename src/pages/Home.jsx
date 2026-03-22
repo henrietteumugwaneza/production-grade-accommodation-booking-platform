@@ -1,44 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import { getListings } from "../services/listings";
 import ListingCard from "../components/ListingCard";
 import MainLayout from "../layouts/MainLayout";
 
 function Home() {
-  const {
-    data,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["listings"],
-    queryFn: getListings,
-  });
-
-  console.log(data); // 👈 DEBUG
-
   return (
     <MainLayout>
-      <h1 className="text-2xl font-semibold mb-4">
-        Explore places to stay
-      </h1>
 
-      {/* ✅ Loading */}
-      {isLoading && <p>Loading listings...</p>}
-
-      {/* ❌ Error */}
-      {isError && (
-        <p className="text-red-500">
-          Something went wrong: {error.message}
+      {/* Hero */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-[color:var(--color-dark)]">
+          Find your next stay
+        </h1>
+        <p className="text-gray-500 mt-1">
+          Explore amazing places around you
         </p>
-      )}
+      </div>
 
-      {/* ✅ Data */}
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {[1,2,3,4,5,6].map((i) => (
+          <ListingCard key={i} />
+        ))}
+      </div>
 
-   {data?.map((item) => (
-  <ListingCard key={item.id} item={item} />
-))}
     </MainLayout>
-    
   );
 }
 
