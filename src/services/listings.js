@@ -9,11 +9,22 @@ export const getListings = async () => {
       },
     });
 
-    return response.data?.data || [];
-  } catch (error) {
-    console.error("API failed, using mock data", error);
+    const rawData = response.data?.data || [];
 
-    // ✅ fallback
+    // ✅ Normalize (clean structure)
+    const listings = rawData.map((item, index) => ({
+      id: item.id || index,
+      name: item.name || "Nice Stay",
+      location: item?.location?.city || "Unknown",
+      price: item?.price?.rate || 100,
+      rating: item?.rating || 4.5,
+      images: item?.images || [],
+    }));
+
+    return listings;
+
+  } catch (error) {
+    console.log("Using mock data");
     return mockListings;
   }
 };
