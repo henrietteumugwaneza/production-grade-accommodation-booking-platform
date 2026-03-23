@@ -6,7 +6,7 @@ const getListings = async (placeId) => {
     url: 'https://airbnb19.p.rapidapi.com/api/v2/searchPropertyByPlaceId',
     params: { placeId: placeId },
     headers: {
-      'X-RapidAPI-Key': 'YOUR_ACTUAL_API_KEY_HERE', // Check this!
+      'X-RapidAPI-Key': 'YOUR_ACTUAL_API_KEY_HERE',
       'X-RapidAPI-Host': 'airbnb19.p.rapidapi.com'
     }
   };
@@ -17,4 +17,8 @@ const getListings = async (placeId) => {
   } catch (error) {
     console.error("API ERROR:", error);
   }
+};
+
+export const api = {
+  getListings
 };

@@ -1,27 +1,46 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { getListings } from "../services/listings";
 import ListingCard from "../components/ListingCard";
 import MainLayout from "../layouts/MainLayout";
 
 function Home() {
+  const [search, setSearch] = useState("");
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["listings"],
+    queryFn: getListings,
+  });
+
+  const filteredData = data.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <MainLayout>
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold">Find your next stay</h1>
 
-      {/* Hero */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[color:var(--color-dark)]">
-          Find your next stay
-        </h1>
-        <p className="text-gray-500 mt-1">
-          Explore amazing places around you
-        </p>
+        <input
+          type="text"
+          placeholder="Search..."
+          className="mt-3 px-4 py-2 border rounded-full w-full md:w-80"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {[1,2,3,4,5,6].map((i) => (
-          <ListingCard key={i} />
-        ))}
-      </div>
-
+      {/* Content */}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredData.map((item) => (
+            <ListingCard key={item.id} item={item} />
+          ))}
+        </div>
+      )}
     </MainLayout>
   );
 }
