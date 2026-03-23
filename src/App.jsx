@@ -6,6 +6,7 @@ import Favorites from "./pages/Favorites";
 import ListingDetails from "./pages/ListingDetails";
 import Bookings from "./pages/Bookings";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           } 
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
