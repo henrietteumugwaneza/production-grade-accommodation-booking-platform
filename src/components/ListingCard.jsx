@@ -1,38 +1,34 @@
-function ListingCard({ item }) {
+import { Link } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
+
+function ListingCard({ item, onFavoriteToggle }) {
+  const { isFavorite } = useFavorites();
+  
   return (
-    <div className="group bg-white rounded-[var(--radius-xl2)] shadow-[var(--shadow-card)] overflow-hidden cursor-pointer">
-
-      {/* Image */}
-      <div className="overflow-hidden">
+    <div className="w-60 bg-white rounded-xl shadow-md overflow-hidden relative">
+      <Link to={`/listing/${item.id}`}>
         <img
-          src={item?.images?.[0] || "https://images.unsplash.com/photo-1505691938895-1758d7feb511"}
-          alt="listing"
-          className="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+          src={item.images?.[0] || "https://via.placeholder.com/300x200?text=No+Image"}
+          alt={item.name}
+          className="w-full h-40 object-cover hover:opacity-90 transition"
         />
-      </div>
+      </Link>
 
-      {/* Content */}
-      <div className="p-4">
+      {/* Favorite Heart */}
+      <button
+        onClick={() => onFavoriteToggle(item)}
+        className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition"
+      >
+        {isFavorite(item.id) ? "❤️" : "🤍"}
+      </button>
 
-        <h2 className="font-semibold text-lg truncate">
-          {item?.name || "Beautiful Stay"}
-        </h2>
-
-        <p className="text-gray-500 text-sm">
-          {item?.location || "Kigali"}
-        </p>
-
-        <div className="flex justify-between items-center mt-3">
-          <span className="font-bold text-[color:var(--color-dark)]">
-            ${item?.price || 120}
-            <span className="text-gray-500 text-sm"> / night</span>
-          </span>
-
-          <span className="text-sm font-medium">
-            ⭐ {item?.rating || 4.8}
-          </span>
-        </div>
-
+      <div className="p-3">
+        <Link to={`/listing/${item.id}`} className="hover:text-[color:var(--color-primary)]">
+          <h2 className="text-sm font-semibold truncate">{item.name}</h2>
+        </Link>
+        <p className="text-xs text-gray-500">{item.location}</p>
+        <p className="text-sm font-bold text-blue-600">${item.price} / night</p>
+        <p className="text-xs text-gray-400">⭐ {item.rating}</p>
       </div>
     </div>
   );

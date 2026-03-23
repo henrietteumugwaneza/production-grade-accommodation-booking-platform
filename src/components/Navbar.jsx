@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
   return (
@@ -14,21 +15,18 @@ function Navbar() {
         </Link>
 
         {/* Search */}
-        <div className="hidden md:flex items-center bg-gray-100 px-4 py-2 rounded-full shadow-sm hover:shadow-md transition">
-          <input
-            type="text"
-            placeholder="Search destinations"
-            className="bg-transparent outline-none text-sm w-40"
-          />
-          <button className="ml-2 bg-[color:var(--color-primary)] text-white p-2 rounded-full">
-            🔍
-          </button>
+        <div className="hidden md:block">
+          <SearchBar />
         </div>
 
         {/* Right */}
         <div className="flex items-center gap-4">
           <Link to="/favorites" className="text-sm font-medium hover:text-[color:var(--color-primary)]">
             Favorites
+          </Link>
+          
+          <Link to="/bookings" className="text-sm font-medium hover:text-[color:var(--color-primary)]">
+            Bookings
           </Link>
 
           <Link

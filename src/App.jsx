@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
@@ -13,7 +14,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
-        <Route path="/bookings" element={<Bookings />} />
+        <Route 
+          path="/bookings" 
+          element={
+            <ProtectedRoute>
+              <Bookings />
+            </ProtectedRoute>
+          } 
+        />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
